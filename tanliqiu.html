@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			display: block;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script>
+		var ball = {
+			x:600,
+			y:200,
+			r:20,
+			color:"#058",
+			vx:-5,
+			vy:-10,
+			g:1
+		}
+		// 创建一个球
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			canvas.width = 800;
+			canvas.height = 600;
+			var context = canvas.getContext("2d");
+
+			setInterval(function(){
+				drawArc(context);
+				update(context);
+			},50)
+			// 让球动起来
+		}
+		function drawArc(cxt){
+			var canvas = cxt.canvas;
+			cxt.clearRect(0,0,canvas.width,canvas.height);
+
+			cxt.fillStyle = ball.color;
+			cxt.beginPath();
+			cxt.arc(ball.x,ball.y,ball.r,0,Math.PI*2);
+			cxt.closePath();
+			cxt.fill();
+		}
+
+		function update(cxt){
+			var canvas = cxt.canvas;
+			ball.x += ball.vx;
+			ball.y += ball.vy;
+			ball.vy += ball.g;
+
+			if(ball.y + ball.r >= canvas.height){
+				ball.vy = -ball.vy * 0.6;
+				ball.y = canvas.height - ball.r;
+			}
+		}
+		
+
+
+	</script>
+</body>
+</html>

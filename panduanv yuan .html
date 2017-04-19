@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			display: block;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext("2d");
+		window.onload = function(){
+			
+			canvas.width = 800;
+			canvas.height = 600;
+		
+			drawArc(context);
+			canvas.addEventListener("mouseup",update)
+			// 事件监听
+		}
+		function drawArc(cxt){
+			var canvas = cxt.canvas;
+			cxt.clearRect(0,0,canvas.width,canvas.height);
+
+			cxt.fillStyle = "#058";
+			cxt.beginPath();
+			cxt.arc(600,500,100,0,Math.PI*2);
+			cxt.fill();
+		}
+
+		function update(e){
+			var x = e.clientX - canvas.getBoundingClientRect().left;
+			var y = e.clientY - canvas.getBoundingClientRect().top;
+			console.log(x,y);
+			if(context.isPointInPath(x,y)){
+				alert(true);
+			}else{
+				alert(false);
+			}
+		}
+		
+	</script>
+</body>
+</html>
