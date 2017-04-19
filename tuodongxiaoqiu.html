@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			display: block;
+			border: 1px solid #ccc;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 600;
+		var context = canvas.getContext("2d");
+
+		canvas.addEventListener("mousemove",move)
+		
+		function drawArc(cxt,x,y){
+			var canvas = cxt.canvas;
+			cxt.clearRect(0,0,canvas.width,canvas.height);
+
+			cxt.beginPath();
+			cxt.arc(x,y,30,0,Math.PI*2);
+			cxt.fillStyle = "red";
+			cxt.fill();
+
+		}
+		function move(e){
+			var x = e.clientX - canvas.getBoundingClientRect().left;
+			var y = e.clientY - canvas.getBoundingClientRect().top;
+			drawArc(context,x,y);
+		}
+	</script>
+</body>
+</html>
